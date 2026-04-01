@@ -41,9 +41,9 @@ export default function OfficersGrid({ officers }: { officers: Officer[] }) {
           <button
             key={index}
             onClick={() => setSelected(officer)}
-            className="bg-white rounded-2xl overflow-hidden border-2 border-gray-200 hover:border-fccla-red hover:shadow-2xl hover:-translate-y-2 transition-all text-left w-full cursor-pointer"
+            className="bg-white rounded-2xl overflow-hidden border-2 border-gray-200 hover:border-fccla-red hover:shadow-2xl hover:-translate-y-2 transition-all text-left w-full cursor-pointer flex flex-col"
           >
-            <div className="relative h-80 bg-gray-100">
+            <div className="relative h-80 bg-gray-100 flex-shrink-0">
               <Image
                 src={officer.photo}
                 alt={officer.name}
