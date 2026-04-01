@@ -1,9 +1,11 @@
 import { Calendar, Newspaper, Users, BookOpen, GraduationCap, Heart } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import PageTransition from '@/components/PageTransition'
 
 export default function Home() {
   return (
+    <PageTransition>
     <main>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 sm:px-6 lg:px-8 mt-20">
@@ -185,6 +187,7 @@ export default function Home() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }
 

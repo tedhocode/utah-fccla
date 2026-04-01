@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { createAdminClient } from '@/lib/supabase/server'
 import OfficersGrid, { type Officer } from './OfficersGrid'
+import PageTransition from '@/components/PageTransition'
 
 const defaultOfficers: Officer[] = [
   { name: "Kylee Bangerter",    position: "State President",            school: "Dixie High School",          region: "Region 5", email: "president@utahfccla.org",         photo: "/officer-photos/kylee.jpg" },
@@ -48,6 +49,7 @@ export default async function StateOfficersPage() {
   const officers = dbOfficers && dbOfficers.length > 0 ? dbOfficers : defaultOfficers
 
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="relative text-white mt-20 overflow-hidden min-h-[480px] flex items-end">
@@ -90,5 +92,6 @@ export default async function StateOfficersPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

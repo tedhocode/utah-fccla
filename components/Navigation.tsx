@@ -83,7 +83,7 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+    <nav className="bg-white shadow-md fixed top-[30px] left-0 right-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
 
@@ -122,19 +122,29 @@ export default function Navigation() {
         </div>
 
         {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden py-4 space-y-4">
+        <div
+          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="py-4 space-y-4">
             {navItems.map((nav) => (
-              <MobileNavSection key={nav.title} title={nav.title} items={nav.items} />
+              <MobileNavSection
+                key={nav.title}
+                title={nav.title}
+                items={nav.items}
+                onClose={() => setMobileMenuOpen(false)}
+              />
             ))}
             <Link
               href="/donate"
+              onClick={() => setMobileMenuOpen(false)}
               className="block bg-fccla-red text-white px-6 py-3 rounded-lg font-bold text-center"
             >
               Donate
             </Link>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   )
@@ -193,9 +203,11 @@ function NavDropdown({
 function MobileNavSection({
   title,
   items,
+  onClose,
 }: {
   title: string
   items: { label: string; href: string }[]
+  onClose: () => void
 }) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -211,19 +223,24 @@ function MobileNavSection({
           className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
-      {isOpen && (
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
         <div className="mt-2 space-y-2 pl-4">
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
+              onClick={onClose}
               className="block py-2 text-gray-700 hover:text-fccla-red transition-colors"
             >
               {item.label}
             </Link>
           ))}
         </div>
-      )}
+      </div>
     </div>
   )
 }
