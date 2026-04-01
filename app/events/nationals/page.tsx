@@ -67,8 +67,8 @@ export default function NationalsPage() {
             <div className="bg-white p-8 rounded-xl text-center border-2 border-gray-200">
               <MapPin size={40} className="mx-auto mb-4 text-fccla-red" />
               <h3 className="font-outfit text-xl font-bold text-fccla-navy mb-2">Location</h3>
-              <p className="text-gray-600">Anaheim Convention Center</p>
-              <p className="text-gray-600">Anaheim, California</p>
+              <p className="text-gray-600">Walter E. Washington Convention Center</p>
+              <p className="text-gray-600">Washington, D.C.</p>
             </div>
             <div className="bg-white p-8 rounded-xl text-center border-2 border-gray-200">
               <Users size={40} className="mx-auto mb-4 text-fccla-red" />
@@ -114,7 +114,7 @@ export default function NationalsPage() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-fccla-red text-2xl">★</span>
-                <span>Explore Anaheim and visit nearby attractions</span>
+                <span>Explore Washington, D.C. and visit iconic national monuments</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-fccla-red text-2xl">★</span>
@@ -162,7 +162,7 @@ export default function NationalsPage() {
                 </div>
                 <div>
                   <h3 className="font-outfit text-xl font-bold text-fccla-navy mb-2">Register for NLC</h3>
-                  <p className="text-gray-700">Complete your national registration and prepare to represent Utah in Anaheim!</p>
+                  <p className="text-gray-700">Complete your national registration and prepare to represent Utah in Washington, D.C.!</p>
                 </div>
               </div>
             </div>
@@ -185,7 +185,7 @@ export default function NationalsPage() {
           <Plane size={64} className="mx-auto mb-6 text-fccla-red" />
           <h2 className="font-outfit text-4xl font-bold text-fccla-navy mb-6">Beyond the Conference</h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-8">
-            NLC is held in Anaheim, California — home to world-famous attractions! Many chapters extend their trip to explore Disneyland, California Adventure, Knott's Berry Farm, and the beautiful Southern California beaches.
+            NLC is held in Washington, D.C. — home to iconic national monuments, world-class museums, and rich American history. Many chapters extend their trip to explore the Smithsonian, the National Mall, the Lincoln Memorial, and more.
           </p>
           <p className="text-gray-600 italic">
             Talk to your adviser about planning chapter activities before or after the conference!

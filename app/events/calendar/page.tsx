@@ -23,7 +23,7 @@ export default function EventsCalendarPage() {
       title: "National Leadership Conference",
       date: "June 28 - July 2, 2026",
       time: "All Day",
-      location: "Anaheim, CA",
+      location: "Washington, D.C.",
       description: "Represent Utah at the national level and compete with the best FCCLA chapters from across the country.",
       registrationLink: "#"
     }

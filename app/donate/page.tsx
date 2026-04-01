@@ -1,5 +1,6 @@
 import { Heart, Star, Users, Trophy, ExternalLink, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { getSiteSettings } from '@/actions/admin/content'
 
 const impactItems = [
   {
@@ -24,7 +25,16 @@ const impactItems = [
   },
 ]
 
-export default function DonatePage() {
+const FALLBACK_PAYPAL = 'https://www.paypal.com/donate?token=em3UjBbdOqWidmubfb38IJ2bfIuMJGFA_WqI0CcbNQMhlW-fEmkr6awhxrAUv7OzgY9Rx-PYgHnvg9CG'
+
+export default async function DonatePage() {
+  let paypalLink = FALLBACK_PAYPAL
+  try {
+    const settings = await getSiteSettings()
+    const setting = (settings as any[]).find((s: any) => s.key === 'paypal_link')
+    if (setting?.value) paypalLink = setting.value
+  } catch { /* use fallback */ }
+
   return (
     <main>
       {/* Header */}
@@ -47,7 +57,7 @@ export default function DonatePage() {
               Utah FCCLA is a nonprofit organization supported by member dues, conference fees, and generous donors like you. Every dollar goes directly toward student programs and leadership opportunities.
             </p>
             <a
-              href="https://www.paypal.com/donate?token=em3UjBbdOqWidmubfb38IJ2bfIuMJGFA_WqI0CcbNQMhlW-fEmkr6awhxrAUv7OzgY9Rx-PYgHnvg9CG"
+              href={paypalLink}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-fccla-red text-white px-12 py-5 rounded-xl font-bold text-xl hover:bg-red-700 transition-all hover:-translate-y-1 hover:shadow-xl"

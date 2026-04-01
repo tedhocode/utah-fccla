@@ -45,7 +45,7 @@ export default function Home() {
             <EventCard 
               title="National Leadership Conference"
               date="June 28 - July 2, 2026"
-              location="Anaheim, California"
+              location="Washington, D.C."
               href="/events/nationals"
             />
           </div>

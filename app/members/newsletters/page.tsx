@@ -113,7 +113,7 @@ export default async function NewslettersPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-fccla-red">★</span>
-                  <span className="text-gray-700">Nationals Preview - See who's headed to Anaheim</span>
+                  <span className="text-gray-700">Nationals Preview - See who's headed to Washington, D.C.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-fccla-red">★</span>
