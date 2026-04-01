@@ -1,6 +1,7 @@
 import { Award, Star, ExternalLink, CheckCircle, Trophy, Users, Heart, Clock, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { createAdminClient } from '@/lib/supabase/server'
+import PageTransition from '@/components/PageTransition'
 
 const staticAwards = [
   {
@@ -94,6 +95,7 @@ export default async function AwardsPage() {
   const awardDeadlines = dbAwards && dbAwards.length > 0 ? dbAwards : null
 
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="relative text-white py-24 px-4 mt-20 overflow-hidden">
@@ -369,5 +371,6 @@ export default async function AwardsPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

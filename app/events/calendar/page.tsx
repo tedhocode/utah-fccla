@@ -1,5 +1,6 @@
 import { Calendar, MapPin, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
+import PageTransition from '@/components/PageTransition'
 
 export default function EventsCalendarPage() {
   const events = [
@@ -30,6 +31,7 @@ export default function EventsCalendarPage() {
   ]
 
   return (
+    <PageTransition>
     <main>
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
         <div className="max-w-7xl mx-auto text-center">
@@ -71,5 +73,6 @@ export default function EventsCalendarPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

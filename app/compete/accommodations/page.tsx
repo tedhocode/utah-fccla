@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Hotel, MapPin, Calendar, Clock, Car, ChevronDown, ChevronUp, Phone, CreditCard, Users, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
+import PageTransition from '@/components/PageTransition'
 
 const faqs = [
   {
@@ -35,6 +36,7 @@ export default function AccommodationsPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
@@ -278,5 +280,6 @@ export default function AccommodationsPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

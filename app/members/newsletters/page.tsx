@@ -1,6 +1,7 @@
 import { Newspaper, Download, Mail, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import { createAdminClient } from '@/lib/supabase/server'
+import PageTransition from '@/components/PageTransition'
 
 const defaultNewsletters = [
   { title: "March 2026 - Spring Forward with FCCLA", date: "March 2026", description: "State Conference highlights, scholarship deadlines, and officer elections", isFeatured: true },
@@ -43,6 +44,7 @@ export default async function NewslettersPage() {
   const archiveNewsletters = newsletters.slice(1)
 
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-red to-red-700 text-white py-24 px-4 mt-20">
@@ -237,6 +239,7 @@ export default async function NewslettersPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }
 

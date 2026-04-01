@@ -5,7 +5,7 @@ import PageTransition from '@/components/PageTransition'
 
 export default function NationalsPage() {
   return (
-    <PageTransition variant="blur">
+    <PageTransition>
     <main>
       {/* National FCCLA Link Banner */}
       <section className="bg-gradient-to-r from-fccla-red to-red-700 py-6 px-4 mt-20">

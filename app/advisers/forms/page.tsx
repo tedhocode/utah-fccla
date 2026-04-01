@@ -1,5 +1,6 @@
 import { FileDown, ExternalLink, AlertCircle, ClipboardList, Users, Trophy, Shield } from 'lucide-react'
 import Link from 'next/link'
+import PageTransition from '@/components/PageTransition'
 
 type FormCategory = {
   icon: React.ElementType
@@ -123,6 +124,7 @@ const categories: FormCategory[] = [
 
 export default function FormsPage() {
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
@@ -258,5 +260,6 @@ export default function FormsPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

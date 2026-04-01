@@ -1,5 +1,6 @@
 import { Trophy, Video, Mic, Palette, Wrench, Sparkles, Download, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
+import PageTransition from '@/components/PageTransition'
 
 export default function StateCompetitionsPage() {
   const competitions = [
@@ -41,6 +42,7 @@ export default function StateCompetitionsPage() {
   ]
 
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
@@ -102,5 +104,6 @@ export default function StateCompetitionsPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

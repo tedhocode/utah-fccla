@@ -1,6 +1,7 @@
 import { Heart, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import { createAdminClient } from '@/lib/supabase/server'
+import PageTransition from '@/components/PageTransition'
 
 type Sponsor = {
   name: string
@@ -44,6 +45,7 @@ export default async function SponsorsPage() {
   const dbSponsors = await getSponsors()
   const sponsors = dbSponsors && dbSponsors.length > 0 ? dbSponsors : defaultSponsors
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
@@ -164,5 +166,6 @@ export default async function SponsorsPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

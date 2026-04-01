@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { FileText, Download, ChevronDown, ChevronUp, BookOpen } from 'lucide-react'
+import PageTransition from '@/components/PageTransition'
 
 type ConferenceType = 'state-leadership' | 'fall-leadership' | 'region'
 
@@ -168,6 +169,7 @@ export default function ProceedingsPage() {
   const filtered = conferences.filter(c => c.year === activeYear)
 
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
@@ -244,5 +246,6 @@ export default function ProceedingsPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

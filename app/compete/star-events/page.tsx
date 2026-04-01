@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { ChefHat, Scissors, Baby, Mic, Briefcase, Heart, Leaf, Building2, ExternalLink, Star, ArrowRight, X } from 'lucide-react'
+import PageTransition from '@/components/PageTransition'
 import Link from 'next/link'
 
 const categories = [
@@ -140,6 +141,7 @@ export default function STAREventsPage() {
   const Icon = selectedCategory.icon
 
   return (
+    <PageTransition>
     <>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
@@ -387,5 +389,6 @@ export default function STAREventsPage() {
         </div>
       )}
     </>
+    </PageTransition>
   )
 }

@@ -1,6 +1,7 @@
 import { Heart, Star, Users, Trophy, ExternalLink, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { getSiteSettings } from '@/actions/admin/content'
+import PageTransition from '@/components/PageTransition'
 
 const impactItems = [
   {
@@ -36,6 +37,7 @@ export default async function DonatePage() {
   } catch { /* use fallback */ }
 
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-red to-red-700 text-white py-24 px-4 mt-20">
@@ -171,5 +173,6 @@ export default async function DonatePage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

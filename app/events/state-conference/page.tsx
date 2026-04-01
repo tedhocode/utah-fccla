@@ -5,7 +5,7 @@ import PageTransition from '@/components/PageTransition'
 
 export default function StateConferencePage() {
   return (
-    <PageTransition variant="slideDown">
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="relative text-white py-24 px-4 mt-20 overflow-hidden">

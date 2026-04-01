@@ -1,5 +1,6 @@
 import { ExternalLink, FileText, BookOpen, GraduationCap, Users, Mail, ClipboardList } from 'lucide-react'
 import Link from 'next/link'
+import PageTransition from '@/components/PageTransition'
 
 const resources = [
   {
@@ -60,6 +61,7 @@ const resources = [
 
 export default function AdvisersPage() {
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="relative text-white py-24 px-4 mt-20 overflow-hidden">
@@ -156,5 +158,6 @@ export default function AdvisersPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

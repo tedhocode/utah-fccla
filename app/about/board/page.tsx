@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { createAdminClient } from '@/lib/supabase/server'
+import PageTransition from '@/components/PageTransition'
 
 const PLACEHOLDER = '/officer-photos/beach-1774315295827.jpeg'
 
@@ -62,6 +63,7 @@ export default async function BoardStaffPage() {
   const { board, staff } = await getMembers()
 
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-slate-700 text-white mt-20 py-24 px-4">
@@ -116,5 +118,6 @@ export default async function BoardStaffPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Heart, Users, Lightbulb, Target, Trophy, ExternalLink, ArrowRight, Download, Globe } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import PageTransition from '@/components/PageTransition'
 
 const programs = [
   {
@@ -104,6 +105,7 @@ export default function NationalProgramsPage() {
   const Icon = selectedProgram.icon
 
   return (
+    <PageTransition>
     <main>
       {/* National FCCLA Link Banner */}
       <section className="bg-gradient-to-r from-fccla-red to-red-700 py-6 px-4 mt-20">
@@ -349,5 +351,6 @@ export default function NationalProgramsPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

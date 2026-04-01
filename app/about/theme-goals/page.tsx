@@ -1,6 +1,7 @@
 import { Sparkles, Target, ExternalLink, Star, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { createAdminClient } from '@/lib/supabase/server'
+import PageTransition from '@/components/PageTransition'
 
 const defaultGoals = [
   {
@@ -66,6 +67,7 @@ export default async function ThemeGoalsPage() {
   const description = themeData?.description || defaultDescription
   const goals = themeData?.goals || defaultGoals
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="relative text-white py-24 px-4 mt-20 overflow-hidden">
@@ -195,5 +197,6 @@ export default async function ThemeGoalsPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Trophy, Users, Target, Calendar, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import PageTransition from '@/components/PageTransition'
 
 const positions = [
   {
@@ -161,6 +162,7 @@ export default function RunForOfficePage() {
   const [selectedPosition, setSelectedPosition] = useState(positions[0])
 
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-red to-red-700 text-white py-24 px-4 mt-20">
@@ -409,5 +411,6 @@ export default function RunForOfficePage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

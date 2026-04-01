@@ -16,7 +16,7 @@ export default function AboutPage() {
   ]
 
   return (
-    <PageTransition variant="scale">
+    <PageTransition>
     <main>
       {/* Page Header */}
       <section className="relative text-white py-24 px-4 mt-20 overflow-hidden">

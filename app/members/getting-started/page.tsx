@@ -1,8 +1,10 @@
 import { Users, School, Award, Target, Heart, ExternalLink, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import PageTransition from '@/components/PageTransition'
 
 export default function GettingStartedPage() {
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-red to-red-700 text-white py-24 px-4 mt-20">
@@ -171,5 +173,6 @@ export default function GettingStartedPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

@@ -1,5 +1,6 @@
 import { Heart, CheckCircle, ExternalLink, Mail, Users, Star, Trophy } from 'lucide-react'
 import Link from 'next/link'
+import PageTransition from '@/components/PageTransition'
 
 const benefits = [
   {
@@ -49,6 +50,7 @@ const partnershipTypes = [
 
 export default function PartnerPage() {
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
@@ -184,5 +186,6 @@ export default function PartnerPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

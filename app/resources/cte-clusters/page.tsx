@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Layers, ArrowRight, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
+import PageTransition from '@/components/PageTransition'
 
 const clusters = [
   {
@@ -154,6 +155,7 @@ export default function CTEClustersPage() {
   const filtered = filter === 'all' ? clusters : clusters.filter(c => c.fcsRelevance === filter)
 
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
@@ -302,5 +304,6 @@ export default function CTEClustersPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

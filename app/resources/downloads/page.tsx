@@ -1,4 +1,5 @@
 import { Download, ExternalLink, Image, FileText, Trophy, Users, Layers } from 'lucide-react'
+import PageTransition from '@/components/PageTransition'
 
 type DownloadItem = {
   name: string
@@ -150,6 +151,7 @@ const categories: DownloadCategory[] = [
 
 export default function DownloadsPage() {
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
@@ -242,5 +244,6 @@ export default function DownloadsPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

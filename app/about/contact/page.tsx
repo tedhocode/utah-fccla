@@ -1,7 +1,9 @@
 import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react'
+import PageTransition from '@/components/PageTransition'
 
 export default function ContactPage() {
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
@@ -149,5 +151,6 @@ export default function ContactPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

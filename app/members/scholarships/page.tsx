@@ -1,6 +1,7 @@
 import { ExternalLink } from 'lucide-react'
 import { createAdminClient } from '@/lib/supabase/server'
 import ScholarshipsSection from './ScholarshipsSection'
+import PageTransition from '@/components/PageTransition'
 
 const defaultScholarships = [
   {
@@ -148,6 +149,7 @@ export default async function ScholarshipsPage() {
   const scholarships = dbScholarships && dbScholarships.length > 0 ? dbScholarships : defaultScholarships
 
   return (
+    <PageTransition>
     <main>
       {/* Header */}
       <section className="bg-gradient-to-br from-fccla-navy to-fccla-navy-light text-white py-24 px-4 mt-20">
@@ -241,5 +243,6 @@ export default async function ScholarshipsPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }
