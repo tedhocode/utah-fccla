@@ -18,8 +18,8 @@ export async function GET(request: NextRequest) {
     if (error) throw error
 
     const photos = (data ?? [])
-      .filter(f => !f.name.startsWith('.'))
-      .map(f => supabase.storage.from(BUCKET).getPublicUrl(f.name).data.publicUrl)
+      .filter((f: any) => !f.name.startsWith('.'))
+      .map((f: any) => supabase.storage.from(BUCKET).getPublicUrl(f.name).data.publicUrl)
 
     return NextResponse.json({ photos })
   } catch (err) {
