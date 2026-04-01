@@ -1,9 +1,11 @@
 import { Calendar, MapPin, Download, ExternalLink, Trophy, ChefHat } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import PageTransition from '@/components/PageTransition'
 
 export default function StateConferencePage() {
   return (
+    <PageTransition variant="slideDown">
     <main>
       {/* Header */}
       <section className="relative text-white py-24 px-4 mt-20 overflow-hidden">
@@ -291,5 +293,6 @@ export default function StateConferencePage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

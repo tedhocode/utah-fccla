@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Mail, MapPin, MessageCircle } from 'lucide-react'
 import Image from 'next/image'
+import PageTransition from '@/components/PageTransition'
 
 export default function AboutPage() {
   const purposes = [
@@ -15,6 +16,7 @@ export default function AboutPage() {
   ]
 
   return (
+    <PageTransition variant="scale">
     <main>
       {/* Page Header */}
       <section className="relative text-white py-24 px-4 mt-20 overflow-hidden">
@@ -204,6 +206,7 @@ export default function AboutPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }
 

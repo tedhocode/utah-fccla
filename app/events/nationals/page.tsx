@@ -1,9 +1,11 @@
 import { Calendar, MapPin, ExternalLink, Globe, Plane, Trophy, Users } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import PageTransition from '@/components/PageTransition'
 
 export default function NationalsPage() {
   return (
+    <PageTransition variant="blur">
     <main>
       {/* National FCCLA Link Banner */}
       <section className="bg-gradient-to-r from-fccla-red to-red-700 py-6 px-4 mt-20">
@@ -221,5 +223,6 @@ export default function NationalsPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }

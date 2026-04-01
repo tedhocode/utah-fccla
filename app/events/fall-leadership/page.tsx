@@ -1,9 +1,11 @@
 import { Calendar, MapPin, Download, ExternalLink, Clock, Users } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import PageTransition from '@/components/PageTransition'
 
 export default function FallLeadershipPage() {
   return (
+    <PageTransition variant="slideRight">
     <main>
       {/* Header */}
       <section className="relative text-white py-24 px-4 mt-20 overflow-hidden">
@@ -227,5 +229,6 @@ export default function FallLeadershipPage() {
         </div>
       </section>
     </main>
+    </PageTransition>
   )
 }
