@@ -24,6 +24,7 @@ type BoardMember = {
   id: string
   name: string
   title: string
+  org?: string
   email?: string
   photo_url?: string
   type: string
@@ -482,6 +483,7 @@ function BoardMembersSection({ members, editingId, setEditingId, addingNew, setA
         id: editingId || undefined,
         name: formData.name,
         title: formData.title,
+        org: formData.org,
         email: formData.email,
         photo_url: formData.photo_url,
         type: formData.type,
@@ -589,6 +591,13 @@ function BoardMembersSection({ members, editingId, setEditingId, addingNew, setA
               className="bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-2.5 focus:outline-none focus:border-fccla-red"
             />
             <input
+              type="text"
+              placeholder="Organization / School (optional)"
+              value={formData.org || ''}
+              onChange={(e) => setFormData({ ...formData, org: e.target.value })}
+              className="bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-2.5 focus:outline-none focus:border-fccla-red"
+            />
+            <input
               type="email"
               placeholder="Email"
               value={formData.email || ''}
@@ -646,6 +655,13 @@ function BoardMembersSection({ members, editingId, setEditingId, addingNew, setA
               placeholder="Title"
               value={formData.title || ''}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              className="bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-2.5 focus:outline-none focus:border-fccla-red"
+            />
+            <input
+              type="text"
+              placeholder="Organization / School (optional)"
+              value={formData.org || ''}
+              onChange={(e) => setFormData({ ...formData, org: e.target.value })}
               className="bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-2.5 focus:outline-none focus:border-fccla-red"
             />
             <input

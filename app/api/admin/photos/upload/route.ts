@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, mkdir } from 'fs/promises'
+import { createAdminClient } from '@/lib/supabase/server'
 import path from 'path'
 
 const MAX_SIZE_MB = 5
 const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/avif']
+const BUCKET = 'photos'
 
 export async function POST(request: NextRequest) {
-  // Check admin session
   const session = request.cookies.get('admin_session')?.value
   if (!session || session !== process.env.ADMIN_SECRET) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -16,9 +16,7 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData()
     const file = formData.get('file') as File | null
 
-    if (!file) {
-      return NextResponse.json({ error: 'No file provided' }, { status: 400 })
-    }
+    if (!file) return NextResponse.json({ error: 'No file provided' }, { status: 400 })
 
     if (!ALLOWED_TYPES.includes(file.type)) {
       return NextResponse.json({ error: 'File must be an image (JPG, PNG, WebP, GIF)' }, { status: 400 })
@@ -28,26 +26,27 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: `File must be under ${MAX_SIZE_MB}MB` }, { status: 400 })
     }
 
-    // Sanitize filename — strip special chars, keep extension
+    // Sanitize filename
     const ext = path.extname(file.name).toLowerCase() || '.jpg'
     const baseName = path.basename(file.name, ext)
       .replace(/[^a-zA-Z0-9_-]/g, '-')
       .replace(/-+/g, '-')
       .toLowerCase()
       .slice(0, 60)
-    const timestamp = Date.now()
-    const filename = `${baseName}-${timestamp}${ext}`
+    const filename = `${baseName}-${Date.now()}${ext}`
 
-    // Ensure directory exists
-    const dir = path.join(process.cwd(), 'public', 'officer-photos')
-    await mkdir(dir, { recursive: true })
-
-    // Write file
+    // Upload to Supabase Storage
+    const supabase = createAdminClient()
     const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
-    await writeFile(path.join(dir, filename), buffer)
+    const { data, error } = await supabase.storage
+      .from(BUCKET)
+      .upload(filename, bytes, { contentType: file.type, upsert: false })
 
-    return NextResponse.json({ url: `/officer-photos/${filename}`, filename })
+    if (error) throw error
+
+    const { data: urlData } = supabase.storage.from(BUCKET).getPublicUrl(data.path)
+
+    return NextResponse.json({ url: urlData.publicUrl, filename })
   } catch (err) {
     console.error('Upload error:', err)
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 })

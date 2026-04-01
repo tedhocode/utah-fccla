@@ -1,52 +1,66 @@
 import Image from 'next/image'
+import { createAdminClient } from '@/lib/supabase/server'
 
 const PLACEHOLDER = '/officer-photos/beach-1774315295827.jpeg'
 
-const boardMembers = [
-  { name: 'Mary Lynn',               title: 'Board President · Region 2 Adviser',                          org: 'Jordan High School' },
-  { name: 'Monique Nielsen',         title: 'Board Secretary · Region 1 Adviser',                          org: 'Weber High School' },
-  { name: 'Candace Wilson',          title: 'Past Board President · Region 3 Adviser',                     org: 'Westlake High School' },
-  { name: 'Aubrey Turnbow Frandsen', title: 'State Adviser',                                               org: '' },
-  { name: 'Lola Evans',              title: 'State FCS Specialist',                                        org: '' },
-  { name: 'Kathryn Spencer',         title: 'Region 5 Adviser',                                            org: 'Canyon View High School' },
-  { name: 'Kelsey Chappell',         title: 'Region 4 Adviser',                                            org: 'Springville High School' },
-  { name: 'Kylee Bangerter',         title: 'State Executive Council President',                           org: 'Dixie High School' },
-  { name: 'Michelle Clouse',         title: 'Post-Secondary FCS Educator & Professional Org Representative', org: 'Utah State University' },
-  { name: 'Lenora Reid',             title: 'Alumni & Associates Representative',                          org: 'Pleasant Grove Jr High' },
-  { name: 'Katie Johnson',           title: 'Business Representative',                                     org: 'Bank of Utah' },
-  { name: 'Becky Sagers',            title: 'Administrative Representative',                               org: '' },
-]
+type Member = {
+  id: string
+  name: string
+  title: string
+  org?: string
+  email?: string
+  photo_url?: string
+  type: string
+  display_order?: number
+}
 
-const staffMembers = [
-  { name: 'Troy Chilcott',    title: 'Webmaster & Technology Specialist', org: 'Salem Hills High School' },
-  { name: 'Maggie Hartman',   title: 'Communications Manager',            org: '' },
-  { name: 'Christine Heslop', title: 'State Officer Assistant',           org: '' },
-  { name: 'Brendan Abbott',   title: 'Finance Administrator',             org: '' },
-  { name: 'Daphne Stockdale', title: 'STAR Event Coordinator',            org: '' },
-]
+async function getMembers(): Promise<{ board: Member[]; staff: Member[] }> {
+  try {
+    const supabase = createAdminClient()
+    const { data, error } = await supabase
+      .from('board_members')
+      .select('*')
+      .order('display_order', { ascending: true })
+    if (error) throw error
+    const all: Member[] = data ?? []
+    return {
+      board: all.filter(m => m.type === 'board'),
+      staff: all.filter(m => m.type === 'staff'),
+    }
+  } catch {
+    return { board: [], staff: [] }
+  }
+}
 
-function PersonCard({ name, title, org }: { name: string; title: string; org: string }) {
+function PersonCard({ member }: { member: Member }) {
   return (
     <div className="bg-white rounded-2xl overflow-hidden border-2 border-gray-200 flex flex-col">
       <div className="relative h-56 bg-gray-100 flex-shrink-0">
         <Image
-          src={PLACEHOLDER}
-          alt={name}
+          src={member.photo_url || PLACEHOLDER}
+          alt={member.name}
           fill
           className="object-cover object-center"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
       </div>
-      <div className="p-5">
-        <h3 className="font-outfit text-lg font-bold text-fccla-navy leading-tight mb-1">{name}</h3>
-        <p className="text-fccla-red font-semibold text-sm mb-1">{title}</p>
-        {org && <p className="text-gray-500 text-sm">{org}</p>}
+      <div className="p-5 flex-1">
+        <h3 className="font-outfit text-lg font-bold text-fccla-navy leading-tight mb-1">{member.name}</h3>
+        <p className="text-fccla-red font-semibold text-sm mb-1">{member.title}</p>
+        {member.org && <p className="text-gray-500 text-sm mb-1">{member.org}</p>}
+        {member.email && (
+          <a href={`mailto:${member.email}`} className="text-gray-400 text-xs hover:text-fccla-red transition-colors">
+            {member.email}
+          </a>
+        )}
       </div>
     </div>
   )
 }
 
-export default function BoardStaffPage() {
+export default async function BoardStaffPage() {
+  const { board, staff } = await getMembers()
+
   return (
     <main>
       {/* Header */}
@@ -68,11 +82,13 @@ export default function BoardStaffPage() {
               The Utah FCCLA State Board of Directors oversees the activities of the organization, made up of advisers, educators, and community representatives.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {boardMembers.map((person) => (
-              <PersonCard key={person.name} {...person} />
-            ))}
-          </div>
+          {board.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {board.map(m => <PersonCard key={m.id} member={m} />)}
+            </div>
+          ) : (
+            <p className="text-gray-400 italic">No board members added yet.</p>
+          )}
         </div>
       </section>
 
@@ -90,11 +106,13 @@ export default function BoardStaffPage() {
               Our state staff keep Utah FCCLA running day-to-day — from events and communications to technology and finances.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {staffMembers.map((person) => (
-              <PersonCard key={person.name} {...person} />
-            ))}
-          </div>
+          {staff.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {staff.map(m => <PersonCard key={m.id} member={m} />)}
+            </div>
+          ) : (
+            <p className="text-gray-400 italic">No staff members added yet.</p>
+          )}
         </div>
       </section>
     </main>

@@ -20,6 +20,7 @@ export async function upsertBoardMember(data: {
   id?: string
   name: string
   title: string
+  org?: string
   email?: string
   photo_url?: string
   type: string

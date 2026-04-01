@@ -1,25 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { readdir } from 'fs/promises'
-import path from 'path'
+import { createAdminClient } from '@/lib/supabase/server'
 
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif']
+const BUCKET = 'photos'
 
 export async function GET(request: NextRequest) {
-  // Check admin session
   const session = request.cookies.get('admin_session')?.value
   if (!session || session !== process.env.ADMIN_SECRET) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   try {
-    const dir = path.join(process.cwd(), 'public', 'officer-photos')
-    const files = await readdir(dir)
-    const images = files.filter(f =>
-      IMAGE_EXTENSIONS.includes(path.extname(f).toLowerCase())
-    )
-    return NextResponse.json({ photos: images.map(f => `/officer-photos/${f}`) })
-  } catch {
-    // Directory may be empty or not exist yet
+    const supabase = createAdminClient()
+    const { data, error } = await supabase.storage
+      .from(BUCKET)
+      .list('', { limit: 200, sortBy: { column: 'created_at', order: 'desc' } })
+
+    if (error) throw error
+
+    const photos = (data ?? [])
+      .filter(f => !f.name.startsWith('.'))
+      .map(f => supabase.storage.from(BUCKET).getPublicUrl(f.name).data.publicUrl)
+
+    return NextResponse.json({ photos })
+  } catch (err) {
+    console.error('Photos list error:', err)
     return NextResponse.json({ photos: [] })
   }
 }
